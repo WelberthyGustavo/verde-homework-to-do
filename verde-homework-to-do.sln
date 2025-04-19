@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matemagos", "Matemagos\Matemagos.csproj", "{A926DDB8-819D-4715-AAA7-93FAD7C23285}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A926DDB8-819D-4715-AAA7-93FAD7C23285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A926DDB8-819D-4715-AAA7-93FAD7C23285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A926DDB8-819D-4715-AAA7-93FAD7C23285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A926DDB8-819D-4715-AAA7-93FAD7C23285}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86D0E1AB-1D76-4DC1-8B17-55284243D9A6}
+	EndGlobalSection
+EndGlobal

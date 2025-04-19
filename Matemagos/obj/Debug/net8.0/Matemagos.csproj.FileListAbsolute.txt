@@ -1,0 +1,15 @@
+/workspaces/verde-homework-to-do/Matemagos/bin/Debug/net8.0/Matemagos
+/workspaces/verde-homework-to-do/Matemagos/bin/Debug/net8.0/Matemagos.deps.json
+/workspaces/verde-homework-to-do/Matemagos/bin/Debug/net8.0/Matemagos.runtimeconfig.json
+/workspaces/verde-homework-to-do/Matemagos/bin/Debug/net8.0/Matemagos.dll
+/workspaces/verde-homework-to-do/Matemagos/bin/Debug/net8.0/Matemagos.pdb
+/workspaces/verde-homework-to-do/Matemagos/obj/Debug/net8.0/Matemagos.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/verde-homework-to-do/Matemagos/obj/Debug/net8.0/Matemagos.AssemblyInfoInputs.cache
+/workspaces/verde-homework-to-do/Matemagos/obj/Debug/net8.0/Matemagos.AssemblyInfo.cs
+/workspaces/verde-homework-to-do/Matemagos/obj/Debug/net8.0/Matemagos.csproj.CoreCompileInputs.cache
+/workspaces/verde-homework-to-do/Matemagos/obj/Debug/net8.0/Matemagos.sourcelink.json
+/workspaces/verde-homework-to-do/Matemagos/obj/Debug/net8.0/Matemagos.dll
+/workspaces/verde-homework-to-do/Matemagos/obj/Debug/net8.0/refint/Matemagos.dll
+/workspaces/verde-homework-to-do/Matemagos/obj/Debug/net8.0/Matemagos.pdb
+/workspaces/verde-homework-to-do/Matemagos/obj/Debug/net8.0/Matemagos.genruntimeconfig.cache
+/workspaces/verde-homework-to-do/Matemagos/obj/Debug/net8.0/ref/Matemagos.dll
