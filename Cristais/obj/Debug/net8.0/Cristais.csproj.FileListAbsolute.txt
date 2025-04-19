@@ -1,0 +1,15 @@
+/workspaces/verde-homework-to-do/Cristais/bin/Debug/net8.0/Cristais
+/workspaces/verde-homework-to-do/Cristais/bin/Debug/net8.0/Cristais.deps.json
+/workspaces/verde-homework-to-do/Cristais/bin/Debug/net8.0/Cristais.runtimeconfig.json
+/workspaces/verde-homework-to-do/Cristais/bin/Debug/net8.0/Cristais.dll
+/workspaces/verde-homework-to-do/Cristais/bin/Debug/net8.0/Cristais.pdb
+/workspaces/verde-homework-to-do/Cristais/obj/Debug/net8.0/Cristais.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/verde-homework-to-do/Cristais/obj/Debug/net8.0/Cristais.AssemblyInfoInputs.cache
+/workspaces/verde-homework-to-do/Cristais/obj/Debug/net8.0/Cristais.AssemblyInfo.cs
+/workspaces/verde-homework-to-do/Cristais/obj/Debug/net8.0/Cristais.csproj.CoreCompileInputs.cache
+/workspaces/verde-homework-to-do/Cristais/obj/Debug/net8.0/Cristais.sourcelink.json
+/workspaces/verde-homework-to-do/Cristais/obj/Debug/net8.0/Cristais.dll
+/workspaces/verde-homework-to-do/Cristais/obj/Debug/net8.0/refint/Cristais.dll
+/workspaces/verde-homework-to-do/Cristais/obj/Debug/net8.0/Cristais.pdb
+/workspaces/verde-homework-to-do/Cristais/obj/Debug/net8.0/Cristais.genruntimeconfig.cache
+/workspaces/verde-homework-to-do/Cristais/obj/Debug/net8.0/ref/Cristais.dll
