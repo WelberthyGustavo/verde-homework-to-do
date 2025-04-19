@@ -1,0 +1,15 @@
+/workspaces/verde-homework-to-do/Chaves/bin/Debug/net8.0/Chaves
+/workspaces/verde-homework-to-do/Chaves/bin/Debug/net8.0/Chaves.deps.json
+/workspaces/verde-homework-to-do/Chaves/bin/Debug/net8.0/Chaves.runtimeconfig.json
+/workspaces/verde-homework-to-do/Chaves/bin/Debug/net8.0/Chaves.dll
+/workspaces/verde-homework-to-do/Chaves/bin/Debug/net8.0/Chaves.pdb
+/workspaces/verde-homework-to-do/Chaves/obj/Debug/net8.0/Chaves.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/verde-homework-to-do/Chaves/obj/Debug/net8.0/Chaves.AssemblyInfoInputs.cache
+/workspaces/verde-homework-to-do/Chaves/obj/Debug/net8.0/Chaves.AssemblyInfo.cs
+/workspaces/verde-homework-to-do/Chaves/obj/Debug/net8.0/Chaves.csproj.CoreCompileInputs.cache
+/workspaces/verde-homework-to-do/Chaves/obj/Debug/net8.0/Chaves.sourcelink.json
+/workspaces/verde-homework-to-do/Chaves/obj/Debug/net8.0/Chaves.dll
+/workspaces/verde-homework-to-do/Chaves/obj/Debug/net8.0/refint/Chaves.dll
+/workspaces/verde-homework-to-do/Chaves/obj/Debug/net8.0/Chaves.pdb
+/workspaces/verde-homework-to-do/Chaves/obj/Debug/net8.0/Chaves.genruntimeconfig.cache
+/workspaces/verde-homework-to-do/Chaves/obj/Debug/net8.0/ref/Chaves.dll
