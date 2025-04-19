@@ -1,0 +1,15 @@
+/workspaces/verde-homework-to-do/Bancos/bin/Debug/net8.0/Bancos
+/workspaces/verde-homework-to-do/Bancos/bin/Debug/net8.0/Bancos.deps.json
+/workspaces/verde-homework-to-do/Bancos/bin/Debug/net8.0/Bancos.runtimeconfig.json
+/workspaces/verde-homework-to-do/Bancos/bin/Debug/net8.0/Bancos.dll
+/workspaces/verde-homework-to-do/Bancos/bin/Debug/net8.0/Bancos.pdb
+/workspaces/verde-homework-to-do/Bancos/obj/Debug/net8.0/Bancos.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/verde-homework-to-do/Bancos/obj/Debug/net8.0/Bancos.AssemblyInfoInputs.cache
+/workspaces/verde-homework-to-do/Bancos/obj/Debug/net8.0/Bancos.AssemblyInfo.cs
+/workspaces/verde-homework-to-do/Bancos/obj/Debug/net8.0/Bancos.csproj.CoreCompileInputs.cache
+/workspaces/verde-homework-to-do/Bancos/obj/Debug/net8.0/Bancos.sourcelink.json
+/workspaces/verde-homework-to-do/Bancos/obj/Debug/net8.0/Bancos.dll
+/workspaces/verde-homework-to-do/Bancos/obj/Debug/net8.0/refint/Bancos.dll
+/workspaces/verde-homework-to-do/Bancos/obj/Debug/net8.0/Bancos.pdb
+/workspaces/verde-homework-to-do/Bancos/obj/Debug/net8.0/Bancos.genruntimeconfig.cache
+/workspaces/verde-homework-to-do/Bancos/obj/Debug/net8.0/ref/Bancos.dll
