@@ -1,146 +1,157 @@
-﻿using System;
-using System.Collections.Generic;
+﻿﻿using System;
 
 class Program
 {
-    static List<(int Time, int Age, bool IsPregnant)> clients = new List<(int, int, bool)>();
-    static List<int> over80Queue = new List<int>();
-    static List<int> elderlyQueue = new List<int>();
-    static List<int> pregnantQueue = new List<int>();
-    static List<int> regularQueue = new List<int>();
-    static List<int> servedOrder = new List<int>();
-    static int currentTime = 0;
-    static int state = 0; // 0: elderly, 1: pregnant, 2: regular
+    struct Client
+    {
+        public int Arrival;
+        public int Age;
+        public bool Gravida;
+        public Client(int a, int age, bool g) { Arrival = a; Age = age; Gravida = g; }
+    }
 
     static void Main()
     {
-        ReadInput(0);
-        ProcessClients(0, 0);
-        PrintOutput(0);
+        // 1) Leitura recursiva
+        Client[] clients = ReadClients(0, 0);
+
+        // prepara vetor de flags e dispara agendamento
+        bool[] served = new bool[clients.Length];
+        int[] order = ServeAll(clients, served, 0, 0, 0);
+
+        // 3) Impressão recursiva
+        PrintAges(order, 0);
     }
 
-    static void ReadInput(int index)
+    // ========== Leitura ==========
+    static Client[] ReadClients(int tempoAccum, int lastArrival)
     {
-        string[] input = Console.ReadLine().Split();
-        int time = int.Parse(input[0]);
-        
-        if (time == -1) return;
+        string line = Console.ReadLine();
+        if (line == null || line == "-1")
+            return new Client[0];
 
-        int age = int.Parse(input[1]);
-        bool isPregnant = input.Length > 2 && input[2] == "G";
-        clients.Add((time, age, isPregnant));
+        var p = line.Split();
+        int T = int.Parse(p[0]);
+        int age = int.Parse(p[1]);
+        bool g = (p.Length == 3 && p[2] == "G");
 
-        ReadInput(index + 1);
+        int arrival = lastArrival + T;
+        Client[] tail = ReadClients(tempoAccum + T, arrival);
+
+        Client[] all = new Client[tail.Length + 1];
+        all[0] = new Client(arrival, age, g);
+        Array.Copy(tail, 0, all, 1, tail.Length);
+        return all;
     }
 
-    static void ProcessClients(int clientIndex, int nextServiceTime)
+    // ========== Agendamento ==========
+    static int[] ServeAll(Client[] C, bool[] S, int curTime, int nextCat, int servedCount)
     {
-        if (clientIndex < clients.Count)
+        if (servedCount == C.Length)
+            return new int[0];
+
+        int idx;
+        int i80 = Find80(C, S, curTime, 0);
+        int newNextCat = nextCat;
+        int finish;
+
+        if (i80 != -1)
         {
-            var (arrival, age, isPregnant) = clients[clientIndex];
-            int adjustedArrival = clientIndex == 0 ? 0 : clients[clientIndex - 1].Time + arrival;
-
-            // Add client to the appropriate queue
-            if (age >= 80)
-                over80Queue.Add(age);
-            else if (age >= 60)
-                elderlyQueue.Add(age);
-            else if (isPregnant)
-                pregnantQueue.Add(age);
-            else
-                regularQueue.Add(age);
-
-            ProcessClients(clientIndex + 1, nextServiceTime);
-        }
-
-        ServeClients(nextServiceTime);
-    }
-
-    static void ServeClients(int nextServiceTime)
-    {
-        if (nextServiceTime > currentTime)
-        {
-            currentTime = nextServiceTime;
-        }
-
-        // Find the next client to arrive after the current time
-        int nextArrival = int.MaxValue;
-        FindNextArrival(0, ref nextArrival);
-
-        if (nextArrival == int.MaxValue && over80Queue.Count == 0 && 
-            elderlyQueue.Count == 0 && pregnantQueue.Count == 0 && regularQueue.Count == 0)
-        {
-            return; // No more clients to process
-        }
-
-        // If there's someone in the 80+ queue, serve them first
-        if (over80Queue.Count > 0)
-        {
-            ServeFromQueue(over80Queue, nextServiceTime);
-            ServeClients(nextServiceTime + 10);
-            return;
-        }
-
-        // Normal rotation: elderly -> pregnant -> regular
-        if (state == 0 && elderlyQueue.Count > 0)
-        {
-            ServeFromQueue(elderlyQueue, nextServiceTime);
-            state = 1;
-            ServeClients(nextServiceTime + 10);
-        }
-        else if (state == 1 && pregnantQueue.Count > 0)
-        {
-            ServeFromQueue(pregnantQueue, nextServiceTime);
-            state = 2;
-            ServeClients(nextServiceTime + 10);
-        }
-        else if (state == 2 && regularQueue.Count > 0)
-        {
-            ServeFromQueue(regularQueue, nextServiceTime);
-            state = 0;
-            ServeClients(nextServiceTime + 10);
+            // atende 80+ já disponível
+            idx = i80;
+            finish = Math.Max(curTime, C[idx].Arrival) + 10;
         }
         else
         {
-            // Skip to the next non-empty queue
-            state = (state + 1) % 3;
-            if (state == 0 && elderlyQueue.Count == 0 ||
-                state == 1 && pregnantQueue.Count == 0 ||
-                state == 2 && regularQueue.Count == 0)
+            // preempção: se um 80+ chegar durante os próximos 10 minutos, aguarda e atende ele
+            int next80Arrival = FindNext80Arrival(C, S, curTime, 0, int.MaxValue);
+            if (next80Arrival <= curTime + 10)
             {
-                state = (state + 1) % 3;
+                idx = FindNext80IndexByArrival(C, S, next80Arrival, 0);
+                finish = next80Arrival + 10;
             }
-            ServeClients(nextServiceTime);
-        }
-    }
-
-    static void ServeFromQueue(List<int> queue, int serviceTime)
-    {
-        if (queue.Count > 0)
-        {
-            servedOrder.Add(queue[0]);
-            queue.RemoveAt(0);
-        }
-    }
-
-    static void FindNextArrival(int index, ref int nextArrival)
-    {
-        if (index >= clients.Count) return;
-
-        int adjustedArrival = index == 0 ? 0 : clients[index - 1].Time + clients[index].Time;
-        if (adjustedArrival > currentTime && adjustedArrival < nextArrival)
-        {
-            nextArrival = adjustedArrival;
+            else
+            {
+                // ciclo normal idoso->gravida->comum
+                int found = FindByCat(C, S, curTime, nextCat, 0);
+                if (found != -1)
+                {
+                    idx = found;
+                    finish = Math.Max(curTime, C[idx].Arrival) + 10;
+                    newNextCat = (nextCat + 1) % 3;
+                }
+                else
+                {
+                    // ninguém elegível: avança para próxima chegada
+                    int nextArr = FindNextArr(C, S, curTime, 0, int.MaxValue);
+                    return ServeAll(C, S, nextArr, nextCat, servedCount);
+                }
+            }
         }
 
-        FindNextArrival(index + 1, ref nextArrival);
+        S[idx] = true;
+        int[] tail = ServeAll(C, S, finish, newNextCat, servedCount + 1);
+        int[] res = new int[tail.Length + 1];
+        res[0] = C[idx].Age;
+        Array.Copy(tail, 0, res, 1, tail.Length);
+        return res;
     }
 
-    static void PrintOutput(int index)
+    static int Find80(Client[] C, bool[] S, int t, int i)
     {
-        if (index >= servedOrder.Count) return;
+        if (i >= C.Length) return -1;
+        if (!S[i] && C[i].Age >= 80 && C[i].Arrival <= t) return i;
+        return Find80(C, S, t, i + 1);
+    }
 
-        Console.WriteLine($"{index + 1}\t{servedOrder[index]}");
-        PrintOutput(index + 1);
+    static int FindNext80Arrival(Client[] C, bool[] S, int t, int i, int curMin)
+    {
+        if (i >= C.Length) return curMin;
+        if (!S[i] && C[i].Age >= 80 && C[i].Arrival > t && C[i].Arrival < curMin)
+            curMin = C[i].Arrival;
+        return FindNext80Arrival(C, S, t, i + 1, curMin);
+    }
+
+    static int FindNext80IndexByArrival(Client[] C, bool[] S, int arrival, int i)
+    {
+        if (i >= C.Length) return -1;
+        if (!S[i] && C[i].Age >= 80 && C[i].Arrival == arrival) return i;
+        return FindNext80IndexByArrival(C, S, arrival, i + 1);
+    }
+
+    static int FindByCat(Client[] C, bool[] S, int t, int cat, int k)
+    {
+        if (k >= 3) return -1;
+        int want = (cat + k) % 3;
+        int idx = FindInOneCat(C, S, t, want, 0);
+        if (idx != -1) return idx;
+        return FindByCat(C, S, t, cat, k + 1);
+    }
+
+    static int FindInOneCat(Client[] C, bool[] S, int t, int want, int i)
+    {
+        if (i >= C.Length) return -1;
+        if (!S[i] && C[i].Arrival <= t &&
+            ((want == 0 && C[i].Age >= 60 && C[i].Age < 80) ||
+             (want == 1 && C[i].Gravida) ||
+             (want == 2 && C[i].Age < 60 && !C[i].Gravida)))
+            return i;
+        return FindInOneCat(C, S, t, want, i + 1);
+    }
+
+    static int FindNextArr(Client[] C, bool[] S, int t, int i, int curMin)
+    {
+        if (i >= C.Length) return curMin;
+        if (!S[i] && C[i].Arrival > t && C[i].Arrival < curMin)
+            curMin = C[i].Arrival;
+        return FindNextArr(C, S, t, i + 1, curMin);
+    }
+
+    
+    static void PrintAges(int[] A, int i)
+    {
+        if (i >= A.Length) return;
+        Console.WriteLine(A[i]);
+        PrintAges(A, i + 1);
     }
 }
