@@ -5,86 +5,86 @@ class Program
     static void Main(string[] args)
     {
         int n = int.Parse(Console.ReadLine());
-        string[] colectiOne = new string[n];
+        string[] colecaoUm = new string[n];
 
-        string numbersOne = Console.ReadLine();
-        string[] numbersOneArray = numbersOne.Split(' ');
+        string entradaUm = Console.ReadLine();
+        string[] numerosUm = entradaUm.Split(' ');
 
-        FillArrayRecursively(colectiOne, numbersOneArray, 0);
+        PreencherRecursivamente(colecaoUm, numerosUm, 0);
 
         int m = int.Parse(Console.ReadLine());
-        string[] colectiTwo = new string[m];
+        string[] colecaoDois = new string[m];
 
-        string numbersTwo = Console.ReadLine();
-        string[] numbersTwoArray = numbersTwo.Split(' ');
+        string entradaDois = Console.ReadLine();
+        string[] numerosDois = entradaDois.Split(' ');
 
-        FillArrayRecursively(colectiTwo, numbersTwoArray, 0);
+        PreencherRecursivamente(colecaoDois, numerosDois, 0);
 
-        Magic(colectiOne, colectiTwo);
+        JuntarOrdenarEExibir(colecaoUm, colecaoDois);
     }
 
-    static void FillArrayRecursively(string[] destination, string[] source, int index)
+    static void PreencherRecursivamente(string[] destino, string[] origem, int indice)
     {
-        if (index >= destination.Length) return;
+        if (indice >= destino.Length) return;
 
-        destination[index] = source[index];
-        FillArrayRecursively(destination, source, index + 1);
+        destino[indice] = origem[indice];
+        PreencherRecursivamente(destino, origem, indice + 1);
     }
 
-    static void Magic(string[] colectiOne, string[] colectiTwo)
+    static void JuntarOrdenarEExibir(string[] colecaoUm, string[] colecaoDois)
     {
-        int totalLength = colectiOne.Length + colectiTwo.Length;
-        string[] combined = new string[totalLength];
+        int tamanhoTotal = colecaoUm.Length + colecaoDois.Length;
+        string[] combinado = new string[tamanhoTotal];
 
-        MergeArraysRecursively(colectiOne, colectiTwo, combined, 0, 0);
+        JuntarColecoes(colecaoUm, colecaoDois, combinado, 0, 0);
 
-        BubbleSortRecursively(combined, combined.Length);
+        OrdenarBubbleRecursivo(combinado, combinado.Length);
 
-        PrintArrayRecursively(combined, 0);
+        ExibirRecursivamente(combinado, 0);
     }
 
-    static void MergeArraysRecursively(string[] arr1, string[] arr2, string[] result, int index1, int index2)
+    static void JuntarColecoes(string[] colecaoUm, string[] colecaoDois, string[] resultado, int indiceUm, int indiceDois)
     {
-        if (index1 < arr1.Length)
+        if (indiceUm < colecaoUm.Length)
         {
-            result[index1] = arr1[index1];
-            MergeArraysRecursively(arr1, arr2, result, index1 + 1, index2);
+            resultado[indiceUm] = colecaoUm[indiceUm];
+            JuntarColecoes(colecaoUm, colecaoDois, resultado, indiceUm + 1, indiceDois);
         }
-        else if (index2 < arr2.Length)
+        else if (indiceDois < colecaoDois.Length)
         {
-            result[index1 + index2] = arr2[index2];
-            MergeArraysRecursively(arr1, arr2, result, index1, index2 + 1);
+            resultado[indiceUm + indiceDois] = colecaoDois[indiceDois];
+            JuntarColecoes(colecaoUm, colecaoDois, resultado, indiceUm, indiceDois + 1);
         }
     }
 
-    static void BubbleSortRecursively(string[] arr, int n)
+    static void OrdenarBubbleRecursivo(string[] vetor, int n)
     {
         if (n == 1) return;
 
-        BubblePass(arr, 0, n);
+        PassoBubble(vetor, 0, n);
 
-        BubbleSortRecursively(arr, n - 1);
+        OrdenarBubbleRecursivo(vetor, n - 1);
     }
 
-    static void BubblePass(string[] arr, int i, int n)
+    static void PassoBubble(string[] vetor, int i, int n)
     {
         if (i >= n - 1) return;
 
-        if (int.Parse(arr[i]) > int.Parse(arr[i + 1]))
+        if (int.Parse(vetor[i]) > int.Parse(vetor[i + 1]))
         {
-            string temp = arr[i];
-            arr[i] = arr[i + 1];
-            arr[i + 1] = temp;
+            string temp = vetor[i];
+            vetor[i] = vetor[i + 1];
+            vetor[i + 1] = temp;
         }
 
-        BubblePass(arr, i + 1, n);
+        PassoBubble(vetor, i + 1, n);
     }
 
-    static void PrintArrayRecursively(string[] arr, int index)
+    static void ExibirRecursivamente(string[] vetor, int indice)
     {
-        if (index >= arr.Length) return;
+        if (indice >= vetor.Length) return;
 
-        Console.WriteLine(arr[index]);
-        PrintArrayRecursively(arr, index + 1);
+        Console.WriteLine(vetor[indice]);
+        ExibirRecursivamente(vetor, indice + 1);
     }
 }
