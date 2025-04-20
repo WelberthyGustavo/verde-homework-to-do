@@ -2,44 +2,89 @@
 
 class Program
 {
-    static int[] v1;
-    static int[] v2;
-
-    static void Main()
+    static void Main(string[] args)
     {
         int n = int.Parse(Console.ReadLine());
-        string[] linha1 = Console.ReadLine().Split(' ');
-        v1 = new int[n];
-        Preencher(v1, linha1, 0);
+        string[] colectiOne = new string[n];
+
+        string numbersOne = Console.ReadLine();
+        string[] numbersOneArray = numbersOne.Split(' ');
+
+        FillArrayRecursively(colectiOne, numbersOneArray, 0);
 
         int m = int.Parse(Console.ReadLine());
-        string[] linha2 = Console.ReadLine().Split(' ');
-        v2 = new int[m];
-        Preencher(v2, linha2, 0);
+        string[] colectiTwo = new string[m];
 
-        Juntar(0, 0);
+        string numbersTwo = Console.ReadLine();
+        string[] numbersTwoArray = numbersTwo.Split(' ');
+
+        FillArrayRecursively(colectiTwo, numbersTwoArray, 0);
+
+        Magic(colectiOne, colectiTwo);
     }
 
-    static void Preencher(int[] vetor, string[] valores, int i)
+    static void FillArrayRecursively(string[] destination, string[] source, int index)
     {
-        if (i >= valores.Length) return;
-        vetor[i] = int.Parse(valores[i]);
-        Preencher(vetor, valores, i + 1);
+        if (index >= destination.Length) return;
+
+        destination[index] = source[index];
+        FillArrayRecursively(destination, source, index + 1);
     }
 
-    static void Juntar(int i, int j)
+    static void Magic(string[] colectiOne, string[] colectiTwo)
     {
-        if (i >= v1.Length && j >= v2.Length) return;
+        int totalLength = colectiOne.Length + colectiTwo.Length;
+        string[] combined = new string[totalLength];
 
-        if (i < v1.Length && (j >= v2.Length || v1[i] < v2[j]))
+        MergeArraysRecursively(colectiOne, colectiTwo, combined, 0, 0);
+
+        BubbleSortRecursively(combined, combined.Length);
+
+        PrintArrayRecursively(combined, 0);
+    }
+
+    static void MergeArraysRecursively(string[] arr1, string[] arr2, string[] result, int index1, int index2)
+    {
+        if (index1 < arr1.Length)
         {
-            Console.WriteLine(v1[i]);
-            Juntar(i + 1, j);
+            result[index1] = arr1[index1];
+            MergeArraysRecursively(arr1, arr2, result, index1 + 1, index2);
         }
-        else
+        else if (index2 < arr2.Length)
         {
-            Console.WriteLine(v2[j]);
-            Juntar(i, j + 1);
+            result[index1 + index2] = arr2[index2];
+            MergeArraysRecursively(arr1, arr2, result, index1, index2 + 1);
         }
+    }
+
+    static void BubbleSortRecursively(string[] arr, int n)
+    {
+        if (n == 1) return;
+
+        BubblePass(arr, 0, n);
+
+        BubbleSortRecursively(arr, n - 1);
+    }
+
+    static void BubblePass(string[] arr, int i, int n)
+    {
+        if (i >= n - 1) return;
+
+        if (int.Parse(arr[i]) > int.Parse(arr[i + 1]))
+        {
+            string temp = arr[i];
+            arr[i] = arr[i + 1];
+            arr[i + 1] = temp;
+        }
+
+        BubblePass(arr, i + 1, n);
+    }
+
+    static void PrintArrayRecursively(string[] arr, int index)
+    {
+        if (index >= arr.Length) return;
+
+        Console.WriteLine(arr[index]);
+        PrintArrayRecursively(arr, index + 1);
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cristais")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+800fbdf38a42ed6e3a0705b606ed08337e7e61b4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23874dd9d7aaec87fa1c57d2d66f20eabcbd4c13")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cristais")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cristais")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
